@@ -19,14 +19,14 @@ build:
     - install: build-essential git libz-dev file
     # Do the build and install on a layer so we can remove it later
     - run:
-      - git clone {{ context.github_url }} /tmp/niimath
-      - cd /tmp/niimath
-      - git reset --hard {{ context.revision }}
-      - cd ./src
-      # Build a static binary
-      - make static -j{{ parallel_jobs }}
-      - cp niimath /usr/bin
-      - rm -rf /tmp/niimath
+        - git clone {{ context.github_url }} /tmp/niimath
+        - cd /tmp/niimath
+        - git reset --hard {{ context.revision }}
+        - cd ./src
+        # Build a static binary
+        - make static -j{{ parallel_jobs }}
+        - cp niimath /usr/bin
+        - rm -rf /tmp/niimath
 
 deploy:
   bins:
@@ -38,7 +38,6 @@ tests:
       #!/usr/bin/env bash
       file /usr/bin/niimath
       niimath
-    if: arch == "x86_64"
 
 readme: |
   ----------------------------------
